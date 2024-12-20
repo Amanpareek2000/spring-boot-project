@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  springboot-app:
+    build: .
+    ports:
+      - "9191:9191"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+    networks:
+      - backend
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "aman@2000"
+      MYSQL_DATABASE: "javatechie"
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
